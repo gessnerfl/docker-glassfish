@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+    glassfish:
+      container_name: glassfish
+      image: gessnerfl/glassfish:3.1.2.2
+      networks:
+        - devnet
+      ports:
+        - "8080:8080"
+        - "4848:4848"
+      environment:
+        DEPLOY_ARCHIVE: glassfish-test-1.0-SNAPSHOT.war
+      volumes:
+        - /Users/gessnerfl/git/devops/docker/glassfish/config:/opt/config
+        - /Users/gessnerfl/git/devops/docker/glassfish-test/target:/opt/pickup
+
+
+networks:
+  devnet:
+    external: true
