@@ -1,6 +1,16 @@
 version: '2'
 
 services:
+    mysql:
+      container_name: mysql
+      image: mysql:5.7
+      networks:
+        - devnet
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: "Test1234"
+        MYSQL_DATABASE: "test"
     glassfish:
       container_name: glassfish
       image: gessnerfl/glassfish:3.1.2.2
@@ -9,6 +19,8 @@ services:
       ports:
         - "8080:8080"
         - "4848:4848"
+      links:
+        - mysql
       environment:
         DEPLOY_ARCHIVE: glassfish-test-1.0-SNAPSHOT.war
       volumes:
